@@ -1,5 +1,5 @@
-# AthexClient
-AthexClient is a open source client to use for Agar.io private servers. Feel free to use this client to play with your friends or make a game, but please give credit :)
+# UI Client
+UI Client is a open source client to use for Agar.io private servers. Feel free to use this client to play with your friends or make a game, but please give credit :)
 
 # Features
   - Minimap
