@@ -18,4 +18,4 @@ Upload the zip file to your FTP server and extract it. To host your own Minimap/
 
 To edit the socket server ip in the client, open the file ``core.js`` in ``/js/`` directory and go to line 52 and replace ``127.0.0.1:9700`` with the ip of your server you are hosting on and the default port 9700. Example: ``31.220.59.33:9700``
 
-To host your own MultiOgar server, head over to -> https://github.com/Barbosik/MultiOgar
+To host your own MultiOgar server, head over to -> https://github.com/Megabyte918/MultiOgar-Edited/
