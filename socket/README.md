@@ -1,5 +1,8 @@
 # Installation
 ## Minimap, Chat & Skins Server
+
+Before you install, edit ``socket.js`` file and replace ``example.com`` with the domain you are hosting the client on.
+
 ### Windows
 1. Download and install Node.js: https://nodejs.org/en/download/
 2. Run the winModulesInstall.bat file
