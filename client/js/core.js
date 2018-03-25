@@ -49,7 +49,7 @@ function UI() {
     this.getLocationsSize = function() {
         return lcsize;
     };
-    var socketip = "127.0.0.1:9700";
+    var socketip = "127.0.0.1:9700"; // Change the ip to your server ip
     this.getSocketIP = function() {
         return socketip;
     };
