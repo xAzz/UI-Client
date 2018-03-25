@@ -1,6 +1,9 @@
 # UI Client
 UI Client is an open source client to use for Agar.io private servers. Feel free to use this client to play with your friends or make a game, but please give credit :)
 
+# Contact xAz
+If you would like to contact me, you can reach me on Discord: ``!!!xAzz#8135`` or Skype: ``thexaz_``
+
 # Features
   - Minimap
   - Chat
