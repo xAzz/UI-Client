@@ -76,3 +76,8 @@ var socketip = "31.220.59.33:9700";
 >---
 
 **To host your own MultiOgar server, head over to -> https://github.com/Megabyte918/MultiOgar-Edited/**
+
+>---
+
+# Credit
+I would like to give credit to Acydwarp for creating Agarplus.io, UI Client is based off the original Agarplus.io V2. I would also like to give credit to Nebula for helping with design idea's and bugs.
