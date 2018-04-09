@@ -1215,6 +1215,10 @@ function UI() {
     };
 }
 
+window.exec = function(command) {
+    chatRoom.sendMessageToServer(command);
+}
+
 function ChatRoom() {
     this.container = "";
     this.isShow = true;
@@ -1242,15 +1246,33 @@ function ChatRoom() {
         this.container = container;
     };
     this.sendMessage = function(msg) {
-        if (msg = msg.trim()) {
-            if (!(2E3 > Date.now() - t && 50 > msg.length)) {
-                conn.sendMessage({
-                    sender: UI.getName(),
-                    msg: msg
-                });
-                this.lastMsg = msg;
-                t = Date.now();
+        if (msg.charAt(0) == '/') { // Comando para el servidor
+            window.exec(msg);
+        } else {
+            if (msg = msg.trim()) {
+                if (!(2E3 > Date.now() - t && 50 > msg.length)) {
+                    conn.sendMessage({
+                        sender: UI.getName(),
+                        msg: msg
+                    });
+                    this.lastMsg = msg;
+                    t = Date.now();
+                }
             }
+        }
+    };
+    this.sendMessageToServer = function(message) {
+        message = message.trim();
+        if ((message.length < 200) && (message.length > 0)) {
+            var view = new DataView(new ArrayBuffer(2 + 2 * message.length));
+            var offset = 0;
+            view.setUint8(offset++, 99);
+            view.setUint8(offset++, 0);
+            for (var i = 0; i < message.length; ++i) {
+                view.setUint16(offset, message.charCodeAt(i), true);
+                offset += 2
+            };
+            window.webSocket.send(view)
         }
     };
     this.enter = function() {
@@ -3034,6 +3056,67 @@ var announcementSent = false;
                         c: index
                     });
                 }, 1200);
+                break;
+            case 99:
+                function readFile() {
+                    var str = '',
+                        b;
+                    while ((b = view.getUint16(offset, true)) != 0) {
+                        offset += 2;
+                        str += String.fromCharCode(b)
+                    };
+                    offset += 2;
+                    return str
+                }
+                var _0x28826 = false;
+                var _0x28881 = false;
+                var _0x28A48 = '';
+                var _0x28AA3 = '#000000';
+                var _0x287CB = view.getUint8(offset++);
+                if (_0x287CB & 2) {
+                    offset += 4
+                };
+                if (_0x287CB & 4) {
+                    offset += 8
+                };
+                if (_0x287CB & 8) {
+                    offset += 16
+                };
+                if (_0x287CB & 0x40) {
+                    _0x28881 = true;
+                    _0x28A48 = '[ADMIN]';
+                    _0x28AA3 = '#ff2222'
+                };
+                var _0x28AFE = 0;
+                if (_0x287CB & 0x20) {
+                    _0x28AFE = 1
+                };
+                if (_0x287CB & 0x10) {
+                    _0x28826 = true;
+                    _0x28A48 = '[MOD]';
+                    _0x28AA3 = '#00a0ff'
+                };
+                if (!_0x28881 || !_0x28826) {
+                    var _0x26A4A = view.getUint8(offset++);
+                    var _0x26994 = view.getUint8(offset++);
+                    var _0x22FA3 = view.getUint8(offset++)
+                };
+                color = (_0x26A4A << 16 | _0x26994 << 8 | _0x22FA3).toString(16);
+                while (color.length < 6) {
+                    color = '0' + color
+                };
+                color = '#' + color;
+                var _0x24996 = readFile();
+                var _0x286BA = readFile();
+                var _0x28715 = {};
+                if (_0x28AFE) {
+                    extraBytes = readFile();
+                    try {
+                        _0x28715 = JSON.parse(extraBytes);
+                    } catch (e) {}
+                };
+                chatRoom.receiveMessage(_0x24996, _0x286BA, color);
+                break;
         }
     }
 
