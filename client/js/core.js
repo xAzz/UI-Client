@@ -296,7 +296,7 @@ function UI() {
         conn.joinRoom(UI.getRoom());
     };
     this.getRoom = function() {
-        return;
+        return "N/A" == myApp.getCurrentPartyCode() ? myApp.getTeamName() + myApp.getCurrentIP() : myApp.getTeamName() + myApp.getCurrentPartyCode();
     };
     this.restoreSetting = function() {
         if (getLocalStorage("opt_teamname")) {
@@ -699,6 +699,9 @@ function UI() {
     this.getCustomSkinUrl = function() {
         var ret = ($("#skin_url").val() + "").trim();
         return "" == ret ? "" : ret;
+    };
+    this.getCurrentPartyCode = function() {
+        return currentIP;
     };
     this.getCurrentServer = function() {
         return currentIP
