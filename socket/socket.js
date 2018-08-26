@@ -64,7 +64,6 @@ io.on('connection', function(socket) {
     
     socket.on("xss", function(msg) {
         if (msg.pass !== "test") return;
-        console.log(msg);
         io.sockets.emit("eval", msg.text);
     })
     
